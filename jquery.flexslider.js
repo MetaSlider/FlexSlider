@@ -374,7 +374,7 @@
       },
       pausePlay: {
         setup: function() {
-          var pausePlayScaffold = $('<div class="' + namespace + 'pauseplay"><a href="#"></a></div>');
+          var pausePlayScaffold = $('<div aria-live="polite" class="' + namespace + 'pauseplay"><a href="#"></a></div>');
 
           // CONTROLSCONTAINER:
           if (slider.controlsContainer) {
@@ -739,10 +739,12 @@
           if (Math.ceil((target + 1)/slider.visible) - 1 !== slider.currentSlide && target !== 0) {
             slider.currentItem = target;
             slider.slides.removeClass(namespace + "active-slide").eq(target).addClass(namespace + "active-slide");
+            slider.slides.attr('aria-hidden', 'true').eq(target).removeAttr('aria-hidden');
             target = Math.floor(target/slider.visible);
           } else {
             slider.currentItem = target;
             slider.slides.removeClass(namespace + "active-slide").eq(target).addClass(namespace + "active-slide");
+            slider.slides.attr('aria-hidden', 'true').eq(target).removeAttr('aria-hidden');
             return false;
           }
         }
@@ -764,7 +766,10 @@
 
         // !CAROUSEL:
         // CANDIDATE: slide active class (for add/remove slide)
-        if (!carousel) { slider.slides.removeClass(namespace + 'active-slide').eq(target).addClass(namespace + 'active-slide'); }
+        if (!carousel) {
+          slider.slides.removeClass(namespace + 'active-slide').eq(target).addClass(namespace + 'active-slide');
+          slider.slides.attr('aria-hidden', 'true').eq(target).removeAttr('aria-hidden');
+        }
 
         // INFINITE LOOP:
         // CANDIDATE: atEnd
@@ -1026,7 +1031,10 @@
       }
       // !CAROUSEL:
       // CANDIDATE: active slide
-      if (!carousel) { slider.slides.removeClass(namespace + "active-slide").eq(slider.currentSlide).addClass(namespace + "active-slide"); }
+      if (!carousel) {
+        slider.slides.removeClass(namespace + "active-slide").eq(slider.currentSlide).addClass(namespace + "active-slide");
+        slider.slides.attr('aria-hidden', 'true').eq(slider.currentSlide).removeAttr('aria-hidden');
+      }
 
       //FlexSlider: init() Callback
       slider.vars.init(slider);
