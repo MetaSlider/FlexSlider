@@ -1038,6 +1038,7 @@
 
       //FlexSlider: init() Callback
       slider.vars.init(slider);
+      slider.doMath();
     };
 
     slider.doMath = function() {
@@ -1060,8 +1061,10 @@
         slider.itemW = (slider.minW > slider.w) ? (slider.w - (slideMargin * (minItems - 1)))/minItems :
                        (slider.maxW < slider.w) ? (slider.w - (slideMargin * (maxItems - 1)))/maxItems :
                        (slider.vars.itemWidth > slider.w) ? slider.w : slider.vars.itemWidth;
+        slider.itemWPlusMargin = slider.itemW + slider.itemM;
+        slider.visible = Math.floor(slider.w / slider.itemWPlusMargin);
+        slider.visible = slider.visible > 0 ? slider.visible : 1;
 
-        slider.visible = Math.floor(slider.w/(slider.itemW));
         slider.move = (slider.vars.move > 0 && slider.vars.move < slider.visible ) ? slider.vars.move : slider.visible;
         slider.pagingCount = Math.ceil(((slider.count - slider.visible)/slider.move) + 1);
         slider.last =  slider.pagingCount - 1;
