@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "build": "NODE_ENV=production npx mix"
+    },
+    "devDependencies": {
+        "laravel-mix": "^6.0.49"
+    }
+}
