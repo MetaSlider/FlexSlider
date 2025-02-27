@@ -1,5 +1,9 @@
 [FlexSlider](http://www.woocommerce.com/flexslider/) fork used in MetaSlider
 
+### Requirements
+
+- node v19.2.0+
+
 ### Important!
 
 Don't manually update the minified version, instead use laravel-mix for this process.
