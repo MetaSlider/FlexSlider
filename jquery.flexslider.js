@@ -30,7 +30,8 @@
         vertical = slider.vars.direction === "vertical",
         reverse = slider.vars.reverse,
         carousel = (slider.vars.itemWidth > 0),
-        fade = slider.vars.animation === "fade",
+        fade = slider.vars.animation !== "slide",
+        animation = slider.vars.animation,
         asNav = slider.vars.asNavFor !== "",
         methods = {};
 
@@ -784,9 +785,71 @@
           // SLIDESHOW && !INFINITE LOOP:
           if (!slider.vars.animationLoop) { slider.pause(); }
         }
+        
+        if (animation === "zooming") {
+            
+            slider.slides.eq(slider.currentSlide).css({
+                "zIndex": 1,
+                "transition": "transform " + slider.vars.animationSpeed + "ms " + slider.vars.easing
+            }).animate(
+                {"opacity": 0}, 
+                {
+                    duration: slider.vars.animationSpeed,
+                    easing: slider.vars.easing,
+                    step: function(now) {
+                        let scale = 1 - (0.5 * now); // Shrinks from 1 to 0.5
+                        $(this).css("transform", `scale(${scale})`);
+                    },
+                    complete: function() {
+                        $(this).css({
+                            "transition": "",
+                        });
+                    }
+                }
+            );
+            
+            slider.slides.eq(target).css({"zIndex": 2, "opacity": 0, "transform": "scale(0.5)"}).animate(
+                {"opacity": 1}, 
+                {
+                    duration: slider.vars.animationSpeed,
+                    easing: slider.vars.easing,
+                    step: function(now) {
+                        let scale = 0.5 + (0.5 * now); // Grows from 0.5 to 1
+                        $(this).css("transform", `scale(${scale})`);
+                    },
+                    complete: slider.wrapup
+                }
+            );  
 
-        // SLIDE:
-        if (!fade) {
+        } else if (animation === "flip") {
+            
+            console.log('aqui',slider);
+
+            slider.find('ul.slides').css({"perspective": "1000px"});
+
+            slider.slides.eq(slider.currentSlide).css({"zIndex": 1}).animate({"opacity": 0}, slider.vars.animationSpeed, slider.vars.easing);
+            
+            slider.slides.eq(target).css({
+                "zIndex": 2, 
+                "opacity": 0, 
+                "transform": "rotateX(180)",
+                "transformStyle": "preserve-3d", 
+                "backfaceVisibility": "hidden"
+            }).animate(
+                {"opacity": 1}, 
+                {
+                    duration: slider.vars.animationSpeed,
+                    easing: slider.vars.easing,
+                    step: function(now) {
+                        let deg = 180 - (180 * now); // Rotate from 180 to 0deg
+                        $(this).css("transform", `rotateX(${deg}deg)`);
+                    },
+                    complete: slider.wrapup
+                }
+            );
+
+        }  else if (!fade) { // SLIDE:
+
           var dimension = (vertical) ? slider.slides.filter(':first').height() : slider.computedW,
               margin, slideString, calcNext;
 
