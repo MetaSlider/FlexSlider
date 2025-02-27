@@ -822,8 +822,6 @@
             );  
 
         } else if (animation === "flip") {
-            
-            console.log('aqui',slider);
 
             slider.find('ul.slides').css({"perspective": "1000px"});
 
