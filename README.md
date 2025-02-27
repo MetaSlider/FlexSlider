@@ -2,7 +2,7 @@
 
 ### Requirements
 
-- node v19.2.0
+- node v19.2.0+
 
 ### Important!
 
