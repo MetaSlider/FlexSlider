@@ -158,7 +158,7 @@
         if (touch && slider.vars.touch) { methods.touch(); }
 
         // FADE&&SMOOTHHEIGHT || SLIDE:
-        if (!fade || (fade && slider.vars.smoothHeight)) { $(window).on("resize orientationchange focus", methods.resize); }
+        if (slider.vars.allowResize && (!fade || (fade && slider.vars.smoothHeight))) { $(window).on("resize orientationchange focus", methods.resize); }
 
         slider.find("img").attr("draggable", "false");
 
@@ -616,7 +616,7 @@
         }
       },
       resize: function() {
-        if (!slider.animating && slider.is(':visible') && slider.vars.enableResize) {
+        if (!slider.animating && slider.is(':visible')) {
           if (!carousel) { slider.doMath(); }
 
           if (fade) {
@@ -1293,7 +1293,7 @@
     isFirefox: false,             // {NEW} Boolean: Set to true when Firefox is the browser used.
 
     // Custom MetaSlider specific
-    enableResize: true,           // {NEW} Boolean: Whether or not to execute slider.resize on resize event
+    allowResize: true,            // {NEW} Boolean: Whether or not to allow slider.resize on resize event
 
     // Callback API
     start: function(){},            //Callback: function(slider) - Fires when the slider loads the first slide
