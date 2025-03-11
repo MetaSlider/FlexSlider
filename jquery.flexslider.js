@@ -616,7 +616,7 @@
         }
       },
       resize: function() {
-        if (!slider.animating && slider.is(':visible')) {
+        if (!slider.animating && slider.is(':visible') && slider.vars.enableResize) {
           if (!carousel) { slider.doMath(); }
 
           if (fade) {
@@ -1291,6 +1291,9 @@
 
     // Browser Specific
     isFirefox: false,             // {NEW} Boolean: Set to true when Firefox is the browser used.
+
+    // Custom MetaSlider specific
+    enableResize: true,           // {NEW} Boolean: Whether or not to execute slider.resize on resize event
 
     // Callback API
     start: function(){},            //Callback: function(slider) - Fires when the slider loads the first slide
