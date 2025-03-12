@@ -158,7 +158,7 @@
         if (touch && slider.vars.touch) { methods.touch(); }
 
         // FADE&&SMOOTHHEIGHT || SLIDE:
-        if (!fade || (fade && slider.vars.smoothHeight)) { $(window).on("resize orientationchange focus", methods.resize); }
+        if (slider.vars.allowResize && (!fade || (fade && slider.vars.smoothHeight))) { $(window).on("resize orientationchange focus", methods.resize); }
 
         slider.find("img").attr("draggable", "false");
 
@@ -1291,6 +1291,9 @@
 
     // Browser Specific
     isFirefox: false,             // {NEW} Boolean: Set to true when Firefox is the browser used.
+
+    // Custom MetaSlider specific
+    allowResize: true,            // {NEW} Boolean: Whether or not to allow slider.resize on resize event
 
     // Callback API
     start: function(){},            //Callback: function(slider) - Fires when the slider loads the first slide
