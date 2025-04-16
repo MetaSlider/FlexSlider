@@ -1109,7 +1109,7 @@
           maxItems = slider.vars.maxItems;
 
       slider.w = (slider.viewport===undefined) ? slider.width() : slider.viewport.width();
-      if (slider.isFirefox) { slider.w = slider.width(); }
+      if (slider.isFirefox || slider.vars.useContainerWidth) { slider.w = slider.width(); }
       slider.h = slide.height();
       slider.boxPadding = slide.outerWidth() - slide.width();
 
@@ -1294,6 +1294,7 @@
 
     // Custom MetaSlider specific
     allowResize: true,            // {NEW} Boolean: Whether or not to allow slider.resize on resize event
+    useContainerWidth: false,      // {NEW} Boolean: Force to use slider.width() in doMath
 
     // Callback API
     start: function(){},            //Callback: function(slider) - Fires when the slider loads the first slide
