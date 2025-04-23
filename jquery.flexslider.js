@@ -244,7 +244,7 @@
                 var captn = slide.attr( 'data-thumbcaption' );
                 if ( '' !== captn && undefined !== captn ) { item += '<span class="' + namespace + 'caption">' + captn + '</span>'; }
               }
-              slider.controlNavScaffold.append('<li aria-label="Show slide ' + j + ' of ' + slider.pagingCount + '">' + item + '</li>');
+              slider.controlNavScaffold.append('<li role="tab" aria-label="Show slide ' + j + ' of ' + slider.pagingCount + '">' + item + '</li>');
               j++;
             }
           }
