@@ -772,9 +772,10 @@
         // !CAROUSEL:
         // CANDIDATE: slide active class (for add/remove slide)
         if (!carousel) {
-          var visualIndex = reverse ? (slider.count - 1 - target) : target;
+          // For "slide", use visualIndex if reverse; for others, always use target
+          var activeIndex = (animation === "slide" && reverse) ? (slider.count - 1 - target) : target;
 
-          slider.slides.removeClass(namespace + 'active-slide').eq(visualIndex).addClass(namespace + 'active-slide');
+          slider.slides.removeClass(namespace + 'active-slide').eq(activeIndex).addClass(namespace + 'active-slide');
           slider.slides.attr('aria-hidden', 'true').eq(target).removeAttr('aria-hidden');
         }
 
