@@ -15,3 +15,9 @@ Install laravel-mix by running `npm install`
 ### Minify Javascript
 
 With every change to jquery.flexslider.js, is required to update the minified version by running `npm run build`
+
+### Optional: create a Docker image
+
+The Docker container comes with the right Node version.
+Inside the local repository, run in terminal: `./run.sh`
+You may need to make it executable first: `chmod +x run.sh`
