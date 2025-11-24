@@ -1321,7 +1321,7 @@
     // Custom MetaSlider specific
     allowResize: true,            // {NEW} Boolean: Whether or not to allow slider.resize on resize event
     useContainerWidth: false,     // {NEW} Boolean: Force to use slider.width() in doMath
-    navStep: 1,                   // {NEW} Integer: Number of slides to move forward/backward (carousel mode only)
+    navStep: 1,                   // {NEW} Integer: Number of slides to move forward/backward (carousel mode only due move param doesn't work)
 
     // Callback API
     start: function(){},            //Callback: function(slider) - Fires when the slider loads the first slide
